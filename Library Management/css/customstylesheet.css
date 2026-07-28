@@ -1,0 +1,63 @@
+﻿.footerlinks{
+    color:white !important;
+    text-decoration:none !important;
+}
+
+
+.footerlinks:hover{
+    color: yellow !important;
+}
+
+#footer1{
+    color:white;
+    background:#a413f1;
+}
+#footer2{
+    color:white;
+    background:#730cc4;
+}
+.btn-signup {
+    background: linear-gradient(90deg, #2563eb, #9333ea);
+    color: #fff;
+    border: none;
+    font-size:larger;
+    font-weight:700;
+}
+    .btn-signup:hover {
+        background: linear-gradient(90deg, #1d4ed8, #7e22ce);
+        font-size: larger;
+        font-weight: 700;
+    }
+.btn-login {
+    background: transparent;
+    color: #7e22ce;
+    border: 2px solid #7e22ce;
+    font-size: larger;
+    font-weight: 700;
+}
+
+    .btn-login:hover {
+        background: #7e22ce;
+        color: #fff;
+        font-size: larger;
+        font-weight: 700;
+    }
+
+.returned{
+    background-color:lightgreen !important;
+
+}
+.pending{
+    background-color:darkred !important;
+}
+
+.error {
+    display: block;
+    color: #e53e3e !important;
+    font-size: 0.78rem;
+    font-weight: 500;
+    margin-top: 5px;
+    min-height: 14px; /* reserves space so layout doesn't jump */
+    letter-spacing: 0.1px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
