@@ -1,3 +1,6 @@
+Library Management System
+A responsive, feature-rich Library Management System built using ASP.NET Web Forms and C#. This project streamlines traditional library workflows, offering dedicated panels for administrative oversight and user interactions.
+
 🚀 Features
 User Authentication & Management: Secure sign-up and login pages featuring robust client-side JavaScript validation, dynamic date picking (flatpickr), and custom error handling.
 
