@@ -1,8 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="usersignup.aspx.cs" Inherits="Library_Management.usersignup" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <br /><br />
@@ -23,16 +25,16 @@
                             </center>
                         </div>
                         <hr />
-                        <form id="usersignup">
+                        <div id="usersignup">
                         <div class ="row">
                             <div class="col-md-6">
                                     <label>Full Name</label>
-                                    <input type="text" placeholder="Full Name" class="form-control" id="name"/>
+                                    <input type="text" placeholder="Full Name" class="form-control" id="name" name="name"/>
                                     <span class="error" id = "nameError" name = "nameError"></span>
                             </div>
                             <div class="col-md-6">
                                     <label>Date of Birth</label>
-                                    <input type="text"  class="form-control" id="dob"/>
+                                    <input type="text"  class="form-control" id="dob" name="dob"/>
                                     <span class="error" id = "dobError" name = "dobError"></span>
                             </div>
                         </div>
@@ -42,12 +44,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                     <label>Contact No.</label>
-                                    <input type="text" placeholder="Contact No." class="form-control" id="contactno"/>
+                                    <input type="text" placeholder="Contact No." class="form-control" id="contactno" name="contactno"/>
                                     <span class="error" id = "contactNoError" name = "contactNoError"></span>
                             </div>
                             <div class="col-md-6">
                                     <label>Email ID</label>
-                                    <input type="email" placeholder="Email ID" class="form-control" id="email"/>
+                                    <input type="email" placeholder="Email ID" class="form-control" id="email" name="email"/>
                                     <span class="error" id = "emailError" name = "emailError"></span>
                             </div>
                         </div>
@@ -57,7 +59,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                     <label>State</label>
-                                    <select class="form-select" id="state">
+                                    <select class="form-select" id="state" name="state">
                                         <option selected value="0">--Select State--</option>
                                         <option value="1">New Delhi</option>
                                     </select>
@@ -65,12 +67,12 @@
                             </div>
                             <div class="col-md-4">
                                     <label>City</label>
-                                    <input type="text" placeholder="City" class="form-control" id="city"/>
+                                    <input type="text" placeholder="City" class="form-control" name="city" id="city"/>
                                     <span class="error" id = "cityError" name = "cityError"></span>
                             </div>
                             <div class="col-md-4">
                                     <label>Pin Code</label>
-                                    <input type="text" placeholder="Pin Code" class="form-control" id="pincode"/>
+                                    <input type="text" placeholder="Pin Code" class="form-control" id="pincode" name="pincode"/>
                                     <span class="error" id = "pincodeError" name = "pincodeError"></span>
                             </div>
                         </div>
@@ -79,7 +81,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label>Full Address</label>
-                                <textarea class="form-control" placeholder="Enter address here...." id="address"></textarea>
+                                <textarea class="form-control" placeholder="Enter address here...." id="address" name="address"></textarea>
                                 <span class="error" id = "addressError" name = "addressError"></span>
                             </div>
                         </div>
@@ -88,19 +90,19 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label>User ID</label>
-                                <input type="text" class="form-control" placeholder="Set User ID" id="userid"/>
+                                <input type="text" class="form-control" placeholder="Set User ID" id="userid" name="userid"/>
                                 <span class="error" id = "useridError" name = "useridError"></span>
                             </div>
                             <div class="col-md-6">
                                 <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Enter password" id="password"/>
+                                <input type="password" class="form-control" placeholder="Enter password" id="password" name="password"/>
                                 <span class="error" id = "passwordError" name = "passwordError"></span>
                             </div>
                         </div>
                         
                         <br />
-                        <button class="btn btn-login w-100" id="save" onclick="validateForm()">Go</button>
-                        </form>
+                        <button type="submit" class="btn btn-login w-100" id="save" onclick="validateForm()">Go</button>
+                        </div>
                     </div>
                 </div>
                 <br />
@@ -252,10 +254,35 @@
                 case 17:
                     setError("passwordError", "*Password should contain at least 8 letters");
                     return;
-                case 19:
-                    Swal.fire("Success", "Successfully Signed up!", "success");
+                
+                    
                 
             }
+
+            var form = document.getElementById("form1");
+            var data = new FormData(form);
+            console.log(form);
+
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:44355/api/saveUser",
+                data: data,
+                processData: false,
+                contentType:false,
+                success: function (response) {
+                    console.log("It's done bro");
+                    Swal.fire("Success", "Successfully Signed up!", "success");
+                    console.log(response);
+                    document.getElementById("form1").reset();
+
+                },
+                error: function (error) {
+
+                    Swal.fire("Error", "Failed LOL", "error");
+                    console.log(error);
+
+                }
+            });
 
         }
         
