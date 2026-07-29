@@ -42,6 +42,23 @@ namespace Library_Management.Controllers
 
                 if(con.State != ConnectionState.Open) { con.Open(); }
 
+                SqlCommand checkCmd = new SqlCommand(
+                                    "SELECT COUNT(*) FROM member_master WHERE member_id = @userid", con);
+
+                checkCmd.Parameters.AddWithValue("@userid", userid);
+
+                int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                if (count > 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.Conflict, new
+                    {
+                        Message = "User ID already exists."
+                    });
+                }
+
+
+
                 cmd = new SqlCommand("save_user", con);
 
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -57,6 +74,7 @@ namespace Library_Management.Controllers
                 cmd.Parameters.AddWithValue("@address", address);
                 cmd.Parameters.AddWithValue("@userid", userid);
                 cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@account_status", "Pending");
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
