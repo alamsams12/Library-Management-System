@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminlogin.aspx.cs" Inherits="Library_Management.adminlogin" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <br /><br />
@@ -24,16 +26,16 @@
                             </center>
                         </div>
                         <div class="col">
-                           <input type="text" placeholder="Admin ID" class="form-control"/>
+                           <input type="text" placeholder="Admin ID" class="form-control" name="admin"/>
                         </div>
                         <div class="col">
                             <br />
-                           <input type="password" placeholder="Password" class="form-control"/>
+                           <input type="password" placeholder="Password" class="form-control" name="password"/>
                         </div>
                         <div class="col">
                             <center>
                                 <br />
-                                <asp:Button ID="userLoginBtn" runat="server" CssClass="btn btn-login w-100" Text="Login" />
+                                <button type="button" class="btn btn-login w-100" onclick="adminLogin()" type="submit">Login</button>
                             </center>
                         </div>
                         
@@ -46,4 +48,28 @@
         </div>
     </div>
     <br />
-</asp:Content>
+
+    <script>
+
+        function adminLogin() {
+            var form = document.getElementById("form1");
+            var data = new FormData(form);
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:44355/api/adminLogin",
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    console.log("Its done bro");
+                    Swal.fire("Success", "Successfully Signed up!", "success");
+                    document.getElementById("form1").reset();
+                },
+                error: function (xhr) {
+                    Swal.fire("Error", "Something went wrong", "error");
+                }
+            })
+        }
+    </script>
+
+   </asp:Content>
