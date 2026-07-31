@@ -62,7 +62,14 @@
                 contentType: false,
                 success: function () {
                     console.log("Its done bro");
-                    Swal.fire("Success", "Successfully Signed up!", "success");
+                    Swal.fire({
+                        title: "Success",
+                        text: "Successfully logged in",
+                        icon: "success",
+                        timer: 1500
+                    }).then(function () {
+                        window.location.href = "homepage.aspx";
+                    });
                     document.getElementById("form1").reset();
                 },
                 error: function (xhr) {

@@ -11,7 +11,18 @@ namespace Library_Management
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["role"]!=null && Session["role"].ToString() == "admin")
+            {
+                LinkButton7.Visible = true;
+                LinkButton3.Visible = true;
 
+                LinkButton11.Visible = true;
+                LinkButton12.Visible = true;
+                LinkButton8.Visible = true;
+                LinkButton9.Visible = true;
+                LinkButton1e.Visible = true;
+
+            }
         }
         protected void LinkButton6_Click(object sender, EventArgs e)
         {
@@ -58,5 +69,7 @@ namespace Library_Management
         {
             Response.Redirect("userprofile.aspx");
         }
+
+        
     }
 }

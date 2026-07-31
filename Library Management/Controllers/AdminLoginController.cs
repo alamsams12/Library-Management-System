@@ -42,11 +42,17 @@ namespace Library_Management.Controllers
 
                 if (rowsAffected !=null && Convert.ToInt32(rowsAffected) > 0)
                 {
+                    HttpContext.Current.Session["role"] = "admin";
+                    HttpContext.Current.Session["username"] = "admin";
+
+
                     var str = "Successfully logged in.";
 
                     var respo = new
                     {
+
                         Message = "Successfully logged in."
+                        
                     };
                     HttpResponseMessage message_response = Request.CreateResponse(HttpStatusCode.OK, str);
                     return message_response;
