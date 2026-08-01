@@ -11,18 +11,62 @@ namespace Library_Management
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["role"]!=null && Session["role"].ToString() == "admin")
+            if (Session["role"] != null)
             {
-                LinkButton7.Visible = true;
-                LinkButton3.Visible = true;
+                if (Session["role"].ToString() == "admin")
+                {
 
-                LinkButton11.Visible = true;
-                LinkButton12.Visible = true;
-                LinkButton8.Visible = true;
-                LinkButton9.Visible = true;
-                LinkButton1e.Visible = true;
+                    if (Session["fullname"] != null)
+                    {
+                        LinkHelloUser.Visible = true;
+                        LinkHelloUser.Text = "Hello " + Session["fullname"].ToString();
 
+                    }
+                    else
+                    {
+                        LinkHelloUser.Text = "Hello User";
+                    }
+                    
+                    LinkLogout.Visible = true;
+                    LinkSignUp.Visible = false;
+
+                    LinkAuthorManagement.Visible = true;
+                    LinkPublisherManagement.Visible = true;
+                    LinkBookInventory.Visible = true;
+                    LinkBookIssuing.Visible = true;
+                    LinkMemberManagement.Visible = true;
+
+                }
+                else if (Session["role"].ToString() == "user")
+                {
+                    if (Session["fullname"] != null)
+                    {
+                        LinkHelloUser.Visible = true;
+                        LinkHelloUser.Text = "Hello " + Session["fullname"].ToString();
+                        
+                    }
+                    else
+                    {
+                        LinkHelloUser.Text = "Hello User";
+                    }
+                    LinkUserLogin.Visible = false;
+                    LinkLogout.Visible = true;
+                    LinkSignUp.Visible = false;
+                }
+                
             }
+            else
+            {
+                LinkHelloUser.Visible = false;
+                LinkLogout.Visible = false;
+
+                LinkAuthorManagement.Visible = false;
+                LinkPublisherManagement.Visible = false;
+                LinkBookInventory.Visible = false;
+                LinkBookIssuing.Visible = false;
+                LinkMemberManagement.Visible = false;
+            }
+
         }
         protected void LinkButton6_Click(object sender, EventArgs e)
         {

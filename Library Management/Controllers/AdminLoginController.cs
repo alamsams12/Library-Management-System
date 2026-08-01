@@ -40,18 +40,21 @@ namespace Library_Management.Controllers
 
                 object rowsAffected = cmd.ExecuteScalar();
 
-                if (rowsAffected !=null && Convert.ToInt32(rowsAffected) > 0)
+                if (rowsAffected !=null && rowsAffected != DBNull.Value)
                 {
-                    HttpContext.Current.Session["role"] = "admin";
-                    HttpContext.Current.Session["username"] = "admin";
+                    string fullName = rowsAffected.ToString();
 
+                    HttpContext.Current.Session["role"] = "admin";
+                    HttpContext.Current.Session["username"] = admin;
+                    HttpContext.Current.Session["fullname"] = fullName;
 
                     var str = "Successfully logged in.";
 
                     var respo = new
                     {
 
-                        Message = "Successfully logged in."
+                        Message = "Successfully logged in.",
+                        FullName = fullName
                         
                     };
                     HttpResponseMessage message_response = Request.CreateResponse(HttpStatusCode.OK, str);

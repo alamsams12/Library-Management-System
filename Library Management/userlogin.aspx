@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="userlogin.aspx.cs" Inherits="Library_Management.userlogin" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <br /><br />
@@ -24,22 +26,22 @@
                             </center>
                         </div>
                         <div class="col">
-                           <input type="text" placeholder="User Name" class="form-control"/>
+                           <input type="text" name="name" placeholder="User Name" class="form-control" id="userName"/>
                         </div>
                         <div class="col">
                             <br />
-                           <input type="password" placeholder="Password" class="form-control"/>
+                           <input type="password" name="password" placeholder="Password" class="form-control" id="password"/>
                         </div>
                         <div class="col">
                             <center>
                                 <br />
-                                <asp:Button ID="userLoginBtn" runat="server" CssClass="btn btn-login w-100" Text="Login" />
+                                <button type="button" class="btn btn-login w-100" onclick="userLogin()">Go</button>
                             </center>
                         </div>
                         <div class="col">
                             <center>
                                 <br />
-                                <asp:Button ID="userSignUpBtn" runat="server" Text="Sign Up" CssClass="btn btn-signup w-100" />
+                                <a href ="usersignup.aspx"><button type="button" class="btn btn-login w-100">Sign Up</button></a>
                             </center>
                         </div>
                     </div>
@@ -53,5 +55,40 @@
     </div>
     <br />
     
+    <script>
 
+        
+        function userLogin() {
+            var name = document.querySelector("#userName").value;
+            var password = document.querySelector("#password").value;
+
+            var formData = new FormData();
+            formData.append("userName",name);
+            formData.append("password",password);
+
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:44355/api/userLogin",
+                data:formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log("Its done bro");
+                    console.log(response);
+                    Swal.fire({
+                        title: "Success",
+                        text: "Successfully logged in",
+                        icon: "success",
+                        timer: 1500
+                    }).then(function () {
+                        window.location.href = "homepage.aspx";
+                    });
+                    document.getElementById("form1").reset();
+                },
+                error: function (xhr) {
+                    Swal.fire("Error", "Something went wrong", "error");
+                }
+            })
+        }
+    </script>
 </asp:Content>
