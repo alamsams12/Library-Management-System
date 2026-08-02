@@ -17,7 +17,7 @@
 
 <%--    our custom css--%>
     <link href="css/customstylesheet.css" rel="stylesheet" />
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="BootStrap/js/jquery-3.3.1.slim.min.js"></script>       <%--jquery--%>
     <script src="BootStrap/js/popper.min.js"></script>                  <%--popper--%>
     <script src="BootStrap/js/bootstrap.min.js"></script>               <%--bootstrap--%>
@@ -60,7 +60,7 @@
                             <asp:LinkButton CssClass="nav-link" ID="LinkSignUp" runat="server" OnClick="LinkButton2_Click">Sign Up</asp:LinkButton>
                         </li>
                         <li class="nav-item active">
-                            <asp:LinkButton CssClass="nav-link" ID="LinkLogout" runat="server" Visible="false">Logout</asp:LinkButton>
+                            <asp:LinkButton CssClass="nav-link" ID="LinkLogout" runat="server" Visible="false" OnClick="LogoutButton">Logout</asp:LinkButton>
                         </li>
                         <li class="nav-item active">
                             <asp:LinkButton CssClass="nav-link" ID="LinkHelloUser" runat="server" OnClick="LinkButton7_Click" Visible="false">Hello User</asp:LinkButton>

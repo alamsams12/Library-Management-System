@@ -91,7 +91,7 @@
                         <hr />
                     </div>
                     <div class="col">
-                        <table class="table" id="issueTable">
+                        <table class="table table-bordered" id="issueTable">
                             <thead>
                                 <tr>
                                     <th style="background-color: #730cc4; color: white;">Member Id</th>

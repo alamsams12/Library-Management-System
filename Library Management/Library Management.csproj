@@ -6030,6 +6030,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
+    <Compile Include="Controllers\AuthorManagementController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
     <Compile Include="Controllers\UserSignUpController.cs" />
     <Compile Include="Global.asax.cs">
@@ -6138,6 +6139,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
     <Folder Include="Views\AdminLogin\" />
+    <Folder Include="Views\AuthorManagement\" />
     <Folder Include="Views\UserLogin\" />
     <Folder Include="Views\UserSignup\" />
   </ItemGroup>
