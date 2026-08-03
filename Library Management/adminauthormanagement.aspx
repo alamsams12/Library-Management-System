@@ -112,6 +112,29 @@
     </div>
     <br />
 
+    <div class="modal-backdrop-g">
+        <div class="modal modal-dialog-centered modal-xl openDeleteModal" id="openDeleteModal" tabindex="-1" aria-labelledby="vendorDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg ">
+                <div class="modal-content shadow-lg border-0">
+
+                    <!-- Header -->
+                    <div class="modal-header">
+                        <div class="mx-auto"><h5>Do you want to delete this entry?</h5></div>
+                    </div>
+
+                    <div class=" row modal-body mx-auto">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-outline-primary" onclick="closeThisModal(this)">Cancel</button>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
 
@@ -120,6 +143,20 @@
             
 
         });
+
+        function openDeleteModal() {
+            $(".modal.openDeleteModal").show();
+            $(".modal.openDeleteModal").addClass("show");
+            $(".modal-backdrop-g").show();
+            $('body').css('overflow', 'hidden');
+        }
+
+        function closeThisModal(el) {
+            $(el).parents(".modal").hide();
+            $(el).parents(".modal").removeClass("show");
+            $(".modal-backdrop-g").hide();
+            $('body').css("overflow", "auto");
+        }
 
         function save_author() {
             var author_name = document.querySelector("#author_name").value;
@@ -169,7 +206,7 @@
                                 <td>${value.country}</td>
                                 <td>${value.description}</td>
                                 <td><button class="form-control btn btn-primary mb-2" id="editAuthor" onclick="editAuthor()">Edit</button>
-                                    <button class="form-control btn btn-danger" id="deleteAuthor" onclick="deleteAuthor()">Delete</button>
+                                    <button type="button" class="form-control btn btn-danger" id="deleteAuthor" onclick="openDeleteModal()">Delete</button>
                                 </td>
                             <tr>`
 
@@ -182,6 +219,8 @@
                 }
             });
         }
-            
+
+        
+
     </script>
 </asp:Content>
