@@ -117,5 +117,48 @@ namespace Library_Management.Controllers
                     con.Close();
             }
         }
+
+
+        [HttpPost]
+        [Route("api/deleteAuthor")]
+
+        public HttpResponseMessage deleteAuthor()
+        {
+            try {
+                string author_id = HttpContext.Current.Request.Form["author_id"];
+
+                if(con.State != ConnectionState.Open) { con.Open(); }
+
+                cmd = new SqlCommand("delete_author",con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@author_id", author_id);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    var str = "Successfully deleted";
+
+                    HttpResponseMessage message_response = Request.CreateResponse(HttpStatusCode.OK, str);
+                    return message_response;
+                }
+                else
+                {
+                    var str = "Not inserted.";
+
+                    HttpResponseMessage message_response = Request.CreateResponse(HttpStatusCode.OK, str);
+                    return message_response;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                HttpResponseMessage msg = this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message.ToString());
+
+                return msg;
+            }
+        }
     }
+
 }

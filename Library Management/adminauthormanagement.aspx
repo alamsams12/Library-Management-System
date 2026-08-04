@@ -66,11 +66,11 @@
             <div class="col-7 mx-auto">
                 <div class="card">
                     <div class="card-body">
-                        <div class="col">
+                        <%--<div class="col">
                             <center>
                                 <img src="imgs/writer%20logo.png" width="150px"/>
                             </center>
-                        </div>
+                        </div>--%>
                         <div class="col">
                             <center>
                                 <h4>Author List</h4>
@@ -124,7 +124,7 @@
 
                     <div class=" row modal-body mx-auto">
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteEntry()">Delete</button>
                         </div>
                         <div class="col-md-6">
                             <button type="button" class="btn btn-outline-primary" onclick="closeThisModal(this)">Cancel</button>
@@ -144,7 +144,10 @@
 
         });
 
-        function openDeleteModal() {
+        var deleteID;
+        function openDeleteModal(id) {
+            deleteID = id;
+            console.log("deleteID",id);
             $(".modal.openDeleteModal").show();
             $(".modal.openDeleteModal").addClass("show");
             $(".modal-backdrop-g").show();
@@ -178,6 +181,7 @@
                 success: function (response) {
                     console.log("Its done bro");
                     console.log(response);
+                    get_author();
                     Swal.fire("Success", "Author added successfully!!", "success");
                 },
                 error: function (xhr) {
@@ -205,8 +209,8 @@
                                 <td>${value.author_name}</td>
                                 <td>${value.country}</td>
                                 <td>${value.description}</td>
-                                <td><button class="form-control btn btn-primary mb-2" id="editAuthor" onclick="editAuthor()">Edit</button>
-                                    <button type="button" class="form-control btn btn-danger" id="deleteAuthor" onclick="openDeleteModal()">Delete</button>
+                                <td>
+                                    <button type="button" class="form-control btn btn-danger" id="deleteAuthor" onclick="openDeleteModal('${value.author_id}')">Delete</button>
                                 </td>
                             <tr>`
 
@@ -220,7 +224,28 @@
             });
         }
 
-        
+        function deleteEntry() {
+            
+            var formdata = new FormData;
+            formdata.append("author_id", deleteID);
+
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:44355/api/deleteAuthor",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+                    closeThisModal(this);
+                    swal.fire("Success", "Successfully Deleted", "success");
+                    get_author();
+                },
+                error: function (xhr) {
+                    Swal.fire("Error", "Something went wrong", "error");
+                }
+            })
+        }
 
     </script>
 </asp:Content>
