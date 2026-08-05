@@ -5,19 +5,23 @@
 <html>
 <head runat="server">
     <title></title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <%--    bootstrap css--%>
     <link href="BootStrap/css/bootstrap.min.css" rel="stylesheet" />
+
 <%--    datatable css--%>
     <link href="Datatables/css/datatables.min.css" rel="stylesheet" />
+    <script src="Datatables/js/datatables.min.js"></script>
 <%--    fontawesome css--%>
     <link href="fontawesome/css/all.css" rel="stylesheet" />
 
+    <%--Sweet alert--%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <%--    our custom css--%>
     <link href="css/customstylesheet.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <script src="BootStrap/js/jquery-3.3.1.slim.min.js"></script>       <%--jquery--%>
     <script src="BootStrap/js/popper.min.js"></script>                  <%--popper--%>
     <script src="BootStrap/js/bootstrap.min.js"></script>               <%--bootstrap--%>

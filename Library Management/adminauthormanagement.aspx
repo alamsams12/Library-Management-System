@@ -3,6 +3,15 @@
 
          <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+        <%--<script type="text/javascript">
+            $(document).ready(function () {
+                $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+            });
+        </script>--%>
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -90,7 +99,7 @@
                                 </tr>
                             </thead>
                             <tbody id="authorListTableItem">
-                                <tr>
+                                <%--<tr>
                                     <td>HK001</td>
                                     <td>J.K Rowling</td>
                                     <td>England</td>
@@ -101,7 +110,7 @@
                                     <td>George R.R Martin</td>
                                     <td>Ireland</td>
                                     <td>Game of Thrones</td>
-                                </tr>
+                                </tr>--%>
                             </tbody>
                         </table>
                     </div>
@@ -199,23 +208,27 @@
                 crossDomain: true,
                 crossOrigin: true,
                 success: function (response) {
-                    $("#authorListTableItem").empty();
-
+                    
                     console.log(response);
 
+                    $("#authorListTableItem").empty();
                     $.each(response.Authors, function (index, value) {
+                        
+
                         var node = `<tr>
                                 <td>${value.author_id}</td>
                                 <td>${value.author_name}</td>
                                 <td>${value.country}</td>
                                 <td>${value.description}</td>
                                 <td>
-                                    <button type="button" class="form-control btn btn-danger" id="deleteAuthor" onclick="openDeleteModal('${value.author_id}')">Delete</button>
+                                    <button type="button" class="form-control btn btn-danger btn-sm mb-2" id="deleteAuthor" onclick="openDeleteModal('${value.author_id}')">Delete</button>
+                                    <button type="button" class="form-control btn btn-primary btn-sm" id="viewAuthor" onclick="viewAuthorModal()">View</button>
                                 </td>
-                            <tr>`
+                            </tr>`
 
                         $("#authorListTableItem").append(node);
                     });
+                    $('#authorListTable').DataTable();
                 },
                 error: function (request, status, error) {
                     console.log(error);
