@@ -72,3 +72,10 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 1040;
 }
+
+input[readonly], textarea[readonly] {
+    background-color: #e9ecef !important;
+    color: #495057 !important;
+    opacity: 1 !important;
+    cursor: not-allowed; 
+}
