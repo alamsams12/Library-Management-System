@@ -1,20 +1,41 @@
-Library Management System
-A responsive, feature-rich Library Management System built using ASP.NET Web Forms and C#. This project streamlines traditional library workflows, offering dedicated panels for administrative oversight and user interactions.
+# Library Management System
 
-🚀 Features
-User Authentication & Management: Secure sign-up and login pages featuring robust client-side JavaScript validation, dynamic date picking (flatpickr), and custom error handling.
+## Overview
+A web-based library management system developed using ASP.NET Web Forms,
+C#, SQL Server, JavaScript, jQuery and Bootstrap.
 
-Book Inventory & Tracking: Comprehensive tracking of book inventories, multi-genre selection tags, and issued book logs.
+## Features
 
-Administrative Controls: Dedicated management modules for authors, publishers, book inventory, and member information.
+### Admin
+- Admin login
+- Member management
+- Book inventory management
+- Book issue management
+- Author management
+- Publisher management
 
-Modern UI/UX: Styled cleanly with Bootstrap, custom CSS stylesheets, FontAwesome icons, and interactive data tables.
+### User
+- User registration
+- User login
+- View books
+- User profile
 
-🛠️ Tech Stack
-Backend: C#, ASP.NET Web Forms (.NET Framework)
+## Technologies
+- ASP.NET Web Forms
+- C#
+- SQL Server
+- HTML
+- CSS
+- JavaScript
+- jQuery
+- Bootstrap
 
-Frontend: HTML5, CSS3, JavaScript, jQuery, Bootstrap
+## Architecture
+Frontend → ASP.NET Web Forms → C# Web API → SQL Server
 
-Plugins / Libraries: SweetAlert2, Flatpickr, DataTables, Select2
-
-Database & Version Control: SQL Server, Git / GitHub
+## How to Run
+1. Clone the repository
+2. Open `Library Management.sln` in Visual Studio
+3. Configure the SQL Server connection string
+4. Create/import the database
+5. Run the application
