@@ -145,10 +145,10 @@
 
                         <div class="row mx-auto">
                             <div class="col-6">
-                                <button class="btn btn-outline-success w-100">Issue</button>
+                                <button class="btn btn-outline-danger w-100">Cancel</button>
                             </div>
                             <div class="col-6">
-                                <button class="btn btn-outline-primary w-100">Return</button>
+                                <button class="btn btn-success w-100">Add</button>
                             </div>
                             
                         </div>
@@ -179,28 +179,45 @@
                                 </tr>
                             </thead>
                             <tbody id="issueTableItem">
+                                
                                 <tr>
-                                    <td>HK001</td>
-                                    <td>Experience the complete journey of Indian Classical Fusion — Soul of Raag, Power of Raag, and Blend of Raag — all in one soulful jukebox.
-                                            A trilogy that celebrates our roots, emotions, and musical depth.
+                                    <td class="align-middle fw-bold text-center" style="width: 80px;">HBK001</td>
+                                    <td>
+                                        <div class="d-flex justify-content-between align-start">
+                                            <!-- Left Side: Book Title, Metadata, and Description -->
+                                            <div>
+                                                <h5 class="fw-bold text-dark mb-1">The song of Fire and Ice</h5>
+                                                <p class="text-muted small mb-1">
+                                                    <strong>Author -</strong> George R.R Martin &nbsp;|&nbsp; 
+                                                    <strong>Genre -</strong> Adventure, Fantasy &nbsp;|&nbsp; 
+                                                    <strong>Language -</strong> English
+                                                </p>
+                                                <p class="text-muted small mb-1">
+                                                    <strong>Publisher -</strong> Game of Thrones &nbsp;|&nbsp; 
+                                                    <strong>Publish Date -</strong> 14-01-2012 &nbsp;|&nbsp; 
+                                                    <strong>Pages -</strong> 1200 &nbsp;|&nbsp; 
+                                                    <strong>Edition -</strong> 2nd
+                                                </p>
+                                                <p class="text-muted small mb-1">
+                                                    <strong>Cost -</strong> 1200 &nbsp;|&nbsp; 
+                                                    <strong>Actual Stock -</strong> 12 &nbsp;|&nbsp; 
+                                                    <strong>Available -</strong> <span class="text-success fw-bold">2</span>
+                                                </p>
+                                                <p class="small text-secondary fst-italic mt-2 mb-0">
+                                                    <strong>Description -</strong> Game of Thrones Spoilers
+                                                </p>
+                                            </div>
 
-                                            Created by Sunix Thakor & Sagar Swarup, this is Series of Raag — an experience that connects tradition with modern sound.
-                                            Let the Raag flow through your soul. 🌸
+                                            <!-- Right Side: Book Cover Image -->
+                                            <div class="ms-3 flex-shrink-0">
+                                                <img src="imgs/Book1poster.jpeg" alt="Book Cover" class="img-thumbnail shadow-sm" style="width: 90px; height: 130px; object-fit: cover;"/>
+                                            </div>
+                                        </div>
                                     </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>HK002</td>
-                                    <td>Experience the complete journey of Indian Classical Fusion — Soul of Raag, Power of Raag, and Blend of Raag — all in one soulful jukebox.
-                                            A trilogy that celebrates our roots, emotions, and musical depth.
-
-                                            Created by Sunix Thakor & Sagar Swarup, this is Series of Raag — an experience that connects tradition with modern sound.
-                                            Let the Raag flow through your soul. 🌸
-                                    </td>
-                                    
                                 </tr>
                             </tbody>
                         </table>
+
                     </div>
                 </div>
 

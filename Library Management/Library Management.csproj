@@ -5955,6 +5955,7 @@
     <Content Include="homepage.aspx" />
     <Content Include="imgs\admin user.png" />
     <Content Include="imgs\book issue.png" />
+    <Content Include="imgs\Book1poster.jpeg" />
     <Content Include="imgs\books banner.png" />
     <Content Include="imgs\books.png" />
     <Content Include="imgs\defaulter.png" />
