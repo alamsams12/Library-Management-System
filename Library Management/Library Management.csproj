@@ -6032,6 +6032,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AuthorManagementController.cs" />
+    <Compile Include="Controllers\BookInventoryController.cs" />
     <Compile Include="Controllers\MemberManagementController.cs" />
     <Compile Include="Controllers\PublisherManagementController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
@@ -6141,8 +6142,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
+    <Folder Include="Uploads\Books\" />
     <Folder Include="Views\AdminLogin\" />
     <Folder Include="Views\AuthorManagement\" />
+    <Folder Include="Views\BookInventory\" />
     <Folder Include="Views\MemberManagement\" />
     <Folder Include="Views\PublisherManagement\" />
     <Folder Include="Views\UserLogin\" />
