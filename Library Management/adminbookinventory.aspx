@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="adminauthormanagement.aspx.cs" Inherits="Library_Management.adminauthormanagement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 </asp:Content>
 
@@ -33,20 +36,20 @@
                             <br />
                         
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col">
                                     <div class="row">
                                         <div class="col-6">
                                             <label>Language</label>
                                             <select class="form-control" name="language">
                                                 <option selected value="0">--Select Language--</option>
-                                                <option value="1">English</option>
-                                                <option value="2">Hindi</option>
-                                                <option value="3">Urdu</option>
-                                                <option value="4">Tamil</option>
-                                                <option value="5">French</option>
-                                                <option value="6">Bengali</option>
-                                                <option value="7">German</option>
-                                                <option value="8">Latin</option>
+                                                <option value="english">English</option>
+                                                <option value="hindi">Hindi</option>
+                                                <option value="urdu">Urdu</option>
+                                                <option value="tamil">Tamil</option>
+                                                <option value="french">French</option>
+                                                <option value="bengali">Bengali</option>
+                                                <option value="german">German</option>
+                                                <option value="latin">Latin</option>
                                             </select>
                                             <span class="error" id = "language" name = "language"></span>
                                         </div>
@@ -56,6 +59,23 @@
                                             <span class="error" id = "authorNameError" name = "authorNameError"></span>
                                         </div>
                                     </div>
+                                    <label>Select Genre</label>
+                                    <select id="genre" name="genre" class="form-control" multiple>
+                                        <option value="Science Fiction">Science Fiction</option>
+                                        <option value="Fantasy">Fantasy</option>
+                                        <option value="Mystery">Mystery</option>
+                                        <option value="Thriller">Thriller</option>
+                                        <option value="Historical Fiction">Historical Fiction</option>
+                                        <option value="Romance">Romance</option>
+                                        <option value="Horror">Horror</option>
+                                        <option value="Biography">Biography</option>
+                                        <option value="Self-Help">Self-Help</option>
+                                        <option value="Autobiography">Autobiography</option>
+                                        <option value="Poetry">Poetry</option>
+                                        <option value="Classic">Classic</option>
+                                        <option value="Adventure">Adventure</option>
+                                    </select>
+                                    <br />
                                     <br />
 
                                     <div class="row">
@@ -73,24 +93,7 @@
                                 </div>
 
                                 <%--later change it to multiple selection dropdown - tags--%>
-                                <div class="col-4">
-                                    <label>Select Genre</label>
-                                        <asp:ListBox id="genre" class="form-control" runat="server" SelectionMode="Multiple" >
-                                            <asp:ListItem>Science Fiction</asp:ListItem>
-                                            <asp:ListItem>Fantasy</asp:ListItem>
-                                            <asp:ListItem>Mystery</asp:ListItem>
-                                            <asp:ListItem>Thriller</asp:ListItem>
-                                            <asp:ListItem>Historical Fiction</asp:ListItem>
-                                            <asp:ListItem>Romance</asp:ListItem>
-                                            <asp:ListItem>Horror</asp:ListItem>
-                                            <asp:ListItem>Biography</asp:ListItem>
-                                            <asp:ListItem>Self-Help</asp:ListItem>
-                                            <asp:ListItem>Autobiography</asp:ListItem>
-                                            <asp:ListItem>Poetry</asp:ListItem>
-                                            <asp:ListItem>Classic</asp:ListItem>
-                                            <asp:ListItem>Adventure</asp:ListItem>
-                                        </asp:ListBox>
-                                </div>
+                                
                             </div>
                             <br />
 
@@ -173,21 +176,29 @@
                                 <h4>Book Inventory List</h4>
                             </center>
                         </div>
+
+                        <label class="fw-semibold">Enter book name or ID</label>
+                        <div class="col input-group">
+                            <input type="text" class="form-control" />
+                            <button class="btn" style="border-color:#979797"><i class="fa fa-search"></i></button>
+                        </div>
+
                         <hr />
                     </div>
                     <div class="col">
-                        <table class="table table-bordered" id="issueTable">
+                        <table class="table table-bordered" id="bookTable">
                             <thead>
                                 <tr>
                                     <th style="background-color: #730cc4; color: white;">Book Id</th>
                                     <th style="background-color: #730cc4; color: white;">Book Description</th>
+                                    <th style="background-color: #730cc4; color: white;">Action </th>
                                     
                                 </tr>
                             </thead>
-                            <tbody id="issueTableItem">
+                            <tbody id="bookTableItem">
                                 
                                 <tr>
-                                    <td class="align-middle fw-bold text-center" style="width: 80px;">HBK001</td>
+                                    <td class="align-middle fw-bold text-center" style="width: 80px;">01</td>
                                     <td>
                                         <div class="d-flex justify-content-between align-start">
                                             <!-- Left Side: Book Title, Metadata, and Description -->
@@ -234,6 +245,15 @@
 
     <script>
 
+        $(document).ready(function () {
+            $("#genre").select2({
+                placeholder: "Select Genre",
+                width: "100%"
+            });
+            get_book();
+        });
+
+
         function setError(id, message) {
             document.getElementById(id).textContent = message;
         }
@@ -241,6 +261,7 @@
         function save_book() {
             var bookName = document.querySelector('[name="bookName"]').value.trim();
             var language = document.querySelector('[name="language"]').value.trim();
+            var genre = $("#genre").val().join(",");
             var authorName = document.querySelector('[name="authorName"]').value.trim();
             var publisher = document.querySelector('[name="publisher"]').value.trim();
             var publishDate = document.querySelector('[name="publisherDate"]').value.trim();
@@ -306,6 +327,10 @@
 
             var form = document.getElementById("form1");
             var data = new FormData(form);
+
+            data.set("genre", genre);
+
+            console.log("Genre:", genre);
             console.log(form);
 
             $.ajax({
@@ -316,16 +341,81 @@
                 processData: false,
                 success: function (response) {
                     console.log(response);
-                    Swal.fire("Success", "Successfully Signed up!", "success");
+                    Swal.fire("Success", "Successfully Saved!", "success");
+                    document.getElementById("form1").reset();
+                    docuemnt.getElementById("genre").reset();
+
                 },
                 error: function (request, status, error) {
-                    console.log(error);
+                    Swal.fire("Error", "Something went wrong!", "error");
 
                 }
             })
             
         }
 
+        function get_book() {
+
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:44355/api/getBook",
+                data: "",
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+                    $("#bookTableItem").empty();
+
+                    $.each(response.Books, function (index, value) {
+                        var node =
+                            `<tr>
+                                <td class="align-middle fw-bold text-center" style="width: 80px;">${value.book_id}</td>
+                                <td>
+                                    <div class="d-flex justify-content-between align-start">
+                                        <!-- Left Side: Book Title, Metadata, and Description -->
+                                        <div>
+                                            <h5 class="fw-bold text-dark mb-1">${value.book_name}</h5>
+                                            <p class="text-muted small mb-1">
+                                                <strong>Author -</strong> ${value.author_name} &nbsp;|&nbsp;
+                                                <strong>Genre -</strong> ${value.genre} &nbsp;|&nbsp;
+                                                <strong>Language -</strong> ${value.language}
+                                            </p>
+                                            <p class="text-muted small mb-1">
+                                                <strong>Publisher -</strong> ${value.publisher_name} &nbsp;|&nbsp;
+                                                <strong>Publish Date -</strong> ${value.publish_date ? value.publish_date.split('T')[0] : ''} &nbsp;|&nbsp;
+                                                <strong>Pages -</strong> ${value.no_of_pages} &nbsp;|&nbsp;
+                                            </p>
+                                            <p class="text-muted small mb-1"><strong>Edition -</strong> ${value.edition}</p>
+                                            <p class="text-muted small mb-1">
+                                                <strong>Cost -</strong> ${value.book_cost} &nbsp;|&nbsp;
+                                                <strong>Actual Stock -</strong> ${value.actual_stock} &nbsp;|&nbsp;
+                                                <strong>Available -</strong> <span class="text-success fw-bold">${value.current_stock}</span>
+                                            </p>
+                                            <p class="small text-secondary fst-italic mt-2 mb-0">
+                                                <strong>Description -</strong> ${value.book_description}
+                                            </p>
+                                        </div>
+
+                                        <!-- Right Side: Book Cover Image -->
+                                        <div class="ms-3 flex-shrink-0">
+                                            <img src="${value.book_img_link}" alt="Book Cover" class="img-thumbnail shadow-sm" style="width: 90px; height: 130px; object-fit: cover;">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary w-100 mb-2">Edit</button>
+                                    <button type="button" class="btn btn-danger w-100">Delete</button>
+                            </tr>`
+                        $("#bookTableItem").append(node);
+                    });
+                    
+
+                },
+                error: function () {
+                    Swal.fire("Error", "Something went wrong!", "error");
+                }
+            })
+        }
 
     </script>
 

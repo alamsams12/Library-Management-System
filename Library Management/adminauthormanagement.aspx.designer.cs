@@ -13,14 +13,5 @@ namespace Library_Management
 
     public partial class adminauthormanagement
     {
-
-        /// <summary>
-        /// genre control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox genre;
     }
 }
