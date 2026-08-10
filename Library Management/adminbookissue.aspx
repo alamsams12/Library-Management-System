@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <label>Member Name</label>
-                                <input type="text" placeholder="Member Name" class="form-control"/>
+                                <input type="text" placeholder="Member Name" class="form-control" id="memberName"/>
                             </div>
                             <div class="col-7">
                                 <label>Book Name</label>
@@ -140,4 +140,10 @@
     </div>
     <br />
 
+
+    <script>
+
+        
+
+    </script>
 </asp:Content>
