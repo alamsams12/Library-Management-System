@@ -11,7 +11,7 @@ namespace Library_Management
 {
 
 
-    public partial class adminauthormanagement
+    public partial class adminbookissue
     {
     }
 }

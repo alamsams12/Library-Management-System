@@ -11,7 +11,12 @@ namespace Library_Management
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["role"] == null ||
+            Session["role"].ToString() != "admin")
+            {
+                Response.Redirect("adminlogin.aspx");
+                return;
+            }
         }
     }
 }

@@ -6019,6 +6019,9 @@
     <Compile Include="adminmemberinfo.aspx.designer.cs">
       <DependentUpon>adminmemberinfo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="adminpublishermanagement.aspx.cs">
       <DependentUpon>adminpublishermanagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -6033,6 +6036,7 @@
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AuthorManagementController.cs" />
     <Compile Include="Controllers\BookInventoryController.cs" />
+    <Compile Include="Controllers\BookIssueController.cs" />
     <Compile Include="Controllers\MemberManagementController.cs" />
     <Compile Include="Controllers\PublisherManagementController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
@@ -6146,6 +6150,7 @@
     <Folder Include="Views\AdminLogin\" />
     <Folder Include="Views\AuthorManagement\" />
     <Folder Include="Views\BookInventory\" />
+    <Folder Include="Views\BookIssue\" />
     <Folder Include="Views\MemberManagement\" />
     <Folder Include="Views\PublisherManagement\" />
     <Folder Include="Views\UserLogin\" />

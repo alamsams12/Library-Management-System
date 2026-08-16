@@ -116,23 +116,23 @@ namespace Library_Management
 
         protected void LogoutButton(object sender, EventArgs e)
         {
-            Session["username"] = "";
-            Session["fullname"] = "";
-            Session["role"] = "";
-            Session["status"] = "";
-
-            LinkLogout.Visible = false;
-            LinkSignUp.Visible = true;
-            LinkUserLogin.Visible = true;
-            LinkHelloUser.Visible = false;
-
-            LinkAuthorManagement.Visible = true;
-            LinkPublisherManagement.Visible = false;
-            LinkBookInventory.Visible = false;
-            LinkBookIssuing.Visible = false;
-            LinkMemberManagement.Visible = false;
+            Session.Clear();
+            Session.Abandon();
 
             Response.Redirect("homepage.aspx");
+
+            //LinkLogout.Visible = false;
+            //LinkSignUp.Visible = true;
+            //LinkUserLogin.Visible = true;
+            //LinkHelloUser.Visible = false;
+
+            //LinkAuthorManagement.Visible = true;
+            //LinkPublisherManagement.Visible = false;
+            //LinkBookInventory.Visible = false;
+            //LinkBookIssuing.Visible = false;
+            //LinkMemberManagement.Visible = false;
+
+            //Response.Redirect("homepage.aspx");
         }
     }
 }
