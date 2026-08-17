@@ -104,5 +104,54 @@ namespace Library_Management.Controllers
                 return msg;
             }
         }
+
+        [HttpPost]
+        [Route("api/issueBooks")]
+
+        public HttpResponseMessage issue_Books()
+        {
+            string memberName = HttpContext.Current.Request.Form["memberName"];
+            string bookName = HttpContext.Current.Request.Form["bookName"];
+            string memberID = HttpContext.Current.Request.Form["memberID"];
+            string bookID = HttpContext.Current.Request.Form["bookID"];
+            string start_date = HttpContext.Current.Request.Form["start_date"];
+            string end_date = HttpContext.Current.Request.Form["end_date"];
+
+            if (con.State != ConnectionState.Open) { con.Open(); }
+
+            cmd = new SqlCommand("issue_books", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@member_id", memberID);
+            cmd.Parameters.AddWithValue("@member_name", memberName);
+            cmd.Parameters.AddWithValue("@book_id", bookID);
+            cmd.Parameters.AddWithValue("@book_name", bookName);
+            cmd.Parameters.AddWithValue("@issue_date", start_date);
+            cmd.Parameters.AddWithValue("@due_date", end_date);
+
+            int rowsAffected = cmd.ExecuteNonQuery();
+
+            if (rowsAffected > 0)
+            {
+                var str = "Successfully issued ";
+
+                var respo = new
+                {
+
+                    Message = "Successfully issued",
+
+                };
+                HttpResponseMessage message_response = Request.CreateResponse(HttpStatusCode.OK, str);
+                return message_response;
+            }
+            else
+            {
+                return Request.CreateResponse(
+                        HttpStatusCode.Unauthorized,
+                        new { Message = "Invalid Admin ID or Password." }
+                    );
+            }
+        }
+
     }
 }

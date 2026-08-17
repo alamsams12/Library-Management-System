@@ -28,7 +28,7 @@
                             <div class="col-5">
                                 <label class="fw-semibold">Member Name</label>
                                 <div class="input-group">
-                                    <input type="text" placeholder="Member Name" class="form-control" id="memberName" onkeyup="searchMember()"/>
+                                    <input type="text" placeholder="Member Name" class="form-control" id="memberName" name="memberName" onkeyup="searchMember()"/>
                                     <div id="search_popup_member" style="display: none; border: 1px solid #ebebeb;  overflow-y: auto; position: absolute; width: 100%; background: white; z-index: 10; top: 43px;">
                                         <ul id="search_member">
                                 
@@ -40,7 +40,7 @@
                             <div class="col-7">
                                 <label class="fw-semibold">Book Name</label>
                                 <div class="input-group">
-                                    <input type="text" placeholder="Book Name" class="form-control" id="bookName" onkeyup="searchBook()"/>
+                                    <input type="text" placeholder="Book Name" class="form-control" id="bookName" name="bookName" onkeyup="searchBook()"/>
                                     <button class="btn btn-login btn-sm">Go</button>
                                     <div id="search_popup_root" style="display: none; border: 1px solid #ebebeb;  overflow-y: auto; position: absolute; width: 100%; background: white; z-index: 10; top: 43px;">
                                         <ul id="search_popup">
@@ -53,13 +53,17 @@
                         <br />
 
                         <div class="row">
-                            <div class="col-5">
+                            <div class="col-4">
                                 <label class="fw-semibold">Member ID</label>
-                                <input type="text"  class="form-control" id="memberID" readonly/>
+                                <input type="text"  class="form-control" id="memberID" name="memberID" readonly/>
                             </div>
-                            <div class="col-7">
+                            <div class="col-4">
                                 <label class="fw-semibold">Book Id</label>
-                                <input type="text"  class="form-control" id="bookID" readonly/>
+                                <input type="text"  class="form-control" id="bookID" name="bookID" readonly/>
+                            </div>
+                            <div class="col-4">
+                                <label class="fw-semibold">Available Units</label>
+                                <input type="text"  class="form-control" id="stock" name="stock" readonly/>
                             </div>
                         </div>
                         <br />
@@ -67,23 +71,19 @@
                         <div class="row">
                             <div class="col-5">
                                 <label class="fw-semibold">Start Date</label>
-                                <input type="date" class="form-control"/>
+                                <input type="date" class="form-control" name="start_date"/>
                             </div>
                             <div class="col-7">
                                 <label class="fw-semibold">End Date</label>
-                                <input type="date"class="form-control"/>
+                                <input type="date" class="form-control" name="end_date"/>
                             </div>
                         </div>
                         <br /><br />
 
                         <div class="row mx-auto">
-                            <div class="col-6">
-                                <button class="btn btn-outline-success w-100">Issue</button>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-success w-100" onclick="issueBook()">Issue</button>
                             </div>
-                            <div class="col-6">
-                                <button class="btn btn-outline-primary w-100">Return</button>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -185,7 +185,7 @@
                     if (response.length > 0) {
                         $.each(response, function (index, value) {
 
-                            var option = `<li onclick="selectSearchBook('${value.book_id}','${value.book_name}')" class="px-3 py-2 border-bottom" style="cursor: pointer; transition: background 0.2s;">
+                            var option = `<li onclick="selectSearchBook('${value.book_id}','${value.book_name}','${value.current_stock}')" class="px-3 py-2 border-bottom" style="cursor: pointer; transition: background 0.2s;">
                                             <div style="display: flex; flex-direction: column; align-items: flex-start;">
                                                 <span>${value.book_name}</span>
                                             </div>
@@ -201,13 +201,13 @@
             })
         }
 
-        function selectSearchBook(book_id,book_name) {
+        function selectSearchBook(book_id,book_name,current_stock) {
 
             $("#search_popup_root").hide();
 
             $("#bookID").val(book_id);
             $("#bookName").val(book_name);
-
+            $("#stock").val(current_stock)
 
         }
 
@@ -259,6 +259,35 @@
 
 
         }
+
+        function issueBook() {
+            console.log($("#stock").val())
+            if ($("#stock").val() === '0') {
+                Swal.fire("No Stock", "Book cannot be issued", "error");
+                return;
+            }
+
+            var form = document.getElementById("form1");
+            var data = new FormData(form);
+
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:44355/api/issueBooks",
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    console.log("It's done bro");
+                    Swal.fire("Book Issued Successfully!!", "", "success");
+                },
+                error(xhr) {
+                    Swal.fire("Error", "Something went wrong", "error");
+                }
+            })
+
+        }
+
+
 
     </script>
 </asp:Content>
