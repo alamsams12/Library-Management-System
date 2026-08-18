@@ -99,6 +99,7 @@
                                 <img src="imgs/book%20issue.png" width="150px"/>
                             </center>
                         </div>
+                        
                         <div class="col">
                             <center>
                                 <h4>Issued Book List</h4>
@@ -106,7 +107,23 @@
                         </div>
                         <hr />
                     </div>
-                    <div class="col">
+
+                    <div class="row">
+                            <div class="col-md-4 mx-auto">
+                                <label class="fw-semibold">Status</label>
+                                <select class="form-control">
+                                    <option selected value="none">--Select--</option>
+                                    <option  value="active">Active</option>
+                                    <option  value="pending">Pending</option>
+                                </select>
+                            </div>
+                            <div class="col-md-7 mx-auto">
+                                <label class="fw-semibold">Search by Name</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    <br />
+                    <div class="col-md-11 mx-auto">
                         <table class="table table-bordered" id="issueTable">
                             <thead>
                                 <tr>
@@ -158,6 +175,10 @@
 
 
     <script>
+
+        $(document).ready(function(){
+            get_issued_books();
+        })
 
         var currentSearch = "";
 
@@ -287,7 +308,53 @@
 
         }
 
+        function get_issued_books() {
 
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:44355/api/getIssuedBooks",
+                data: "",
+                processData: false,
+                contentType:false,
+                success: function (response) {
+                    console.log(response);
+                    $("#issueTableItem").empty();
+
+                    $.each(response.Books, function (index, value) {
+
+                        var node = `
+                            <tr>
+                                    <td>${value.member_id}</td>
+                                    <td>${value.member_name}</td>
+                                    <td>${value.book_id}</td>
+                                    <td>${value.book_name}</td>
+                                    <td class="text-nowrap">${value.issue_date ? value.issue_date.split('T')[0] : ''}</td>
+                                    <td class="text-nowrap">${value.due_date ? value.due_date.split('T')[0] : ''}</td>`
+
+                        if (value.status == 'Pending') {
+                            node = node + `<td class="pending text-center">
+                                        <span class="d-flex flex-column gap-2">
+                                            <button type="button" class="form-control">Returned</button>
+                                            <button type="button" class="form-control">View</button>
+                                        </span>
+                                    </td>
+                                </tr>`
+
+                        }
+                        else {
+                            node = node + `<td class="returned text-center">
+                                        <button type="button" class="w-100 form-control">View</button>
+
+                                    </td>
+                                </tr>
+                        `
+                        }
+                        $("#issueTableItem").append(node);
+                    });
+                }
+
+            })
+        }
 
     </script>
 </asp:Content>

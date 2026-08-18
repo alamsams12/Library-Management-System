@@ -153,5 +153,47 @@ namespace Library_Management.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/getIssuedBooks")]
+
+        public HttpResponseMessage get_issued_books()
+        {
+            try
+            {
+                if(con.State != ConnectionState.Open) { con.Open(); }
+
+                cmd = new SqlCommand("get_issued_books", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+
+                var books = new List<Dictionary<string, object>>();
+                if (ds.Tables.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        var rowData = new Dictionary<string, object>();
+                        foreach (DataColumn col in ds.Tables[0].Columns)
+                        {
+                            rowData[col.ColumnName] = row[col];
+                        }
+                        books.Add(rowData);
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, new
+                {
+                    Books = books,
+                });
+
+
+            }
+            catch(Exception ex)
+            {
+                HttpResponseMessage msg = this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message.ToString());
+                return msg;
+            }
+        }
     }
 }
